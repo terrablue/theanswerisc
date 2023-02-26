@@ -5,6 +5,10 @@ const conf = {
   base: "content/blog",
   md: ".md",
   json: ".json",
+  date: {
+    locale: "en-AU",
+    format: {day: "numeric", month: "long", year: "numeric"},
+  },
 };
 
 // get names of all posts
@@ -42,9 +46,11 @@ if (await build.exists) {
 await build.file.create();
 
 const replace = (name, html, json) => {
+  const toDate = epoch => new Date(epoch ?? Date.new());
   const replacements = {
     title: json.title ?? name,
-    date: json.epoch ? new Date(json.epoch * 1000) : new Date(), // FIX: warn
+    // FIX: warn
+    date: toDate(json.epoch).toLocaleString(...Object.values(conf.date)),
     author: json.author ?? "terrablue", // FIX: make dynamic
   };
   return Object.entries(replacements).reduce((replaced, [name, value]) =>
