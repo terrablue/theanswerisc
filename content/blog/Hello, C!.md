@@ -9,7 +9,7 @@ the field, like Rust and Zig, do offer ways to write safer code while retaining
 the relative proximity to hardware that keeps people coming back to C. This blog
 is not about trying to diminish those worthy efforts, or saying there are no
 problems in C we can fix by using better tools, but it is also in recognition
-that is important to properly understand the tools we already have, and that
+that it is important to properly understand the tools we already have, and that
 are the significant underpinnings of our technological stack.
 
 As for my perspective, I like the simplicity of the language and that, while
