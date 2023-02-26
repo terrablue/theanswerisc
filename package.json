@@ -1,0 +1,11 @@
+{
+  "name": "theanswerisc",
+  "type": "module",
+  "scripts": {
+    "build": "node build.js"
+  },
+  "dependencies": {
+    "marked": "^4.2.12",
+    "runtime-compat": "^0.12.3"
+  }
+}
