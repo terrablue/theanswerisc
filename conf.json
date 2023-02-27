@@ -1,0 +1,14 @@
+{
+  "base": "content/blog",
+  "md": ".md",
+  "json": ".json",
+  "date": {
+    "locale": "en-AU",
+    "format": {"day": "numeric", "month": "long", "year": "numeric"}
+  },
+  "author": "terrablue",
+  "path": {
+    "base": "content/blog",
+    "build": "site"
+  }
+}

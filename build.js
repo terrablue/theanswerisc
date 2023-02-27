@@ -1,19 +1,10 @@
 import {marked} from "marked";
 import {File, Path} from "runtime-compat/filesystem";
-
-const conf = {
-  base: "content/blog",
-  md: ".md",
-  json: ".json",
-  date: {
-    locale: "en-AU",
-    format: {day: "numeric", month: "long", year: "numeric"},
-  },
-};
+import conf from "./conf.json" assert {type: "json"};
 
 // get names of all posts
 const names = await Promise.all((
-  await Path.list(conf.base, path => path.endsWith(conf.md)))
+  await Path.list(conf.path.base, path => path.endsWith(conf.md)))
     .map(({name}) => name.slice(0, -conf.md.length)));
 
 const load = async (path, type, transformer) => {
@@ -29,7 +20,7 @@ const load = async (path, type, transformer) => {
 // consider only posts that have both a .md and a .json file; warn about
 // missing .json or .md
 const posts = (await Promise.all(names.map(async name => {
-  const base = new Path(conf.base);
+  const base = new Path(conf.path.base);
   return {
     name,
     html: await load(base.join(`${name}${conf.md}`), conf.md, marked.parse),
@@ -37,7 +28,7 @@ const posts = (await Promise.all(names.map(async name => {
   }
 }))).filter(({html, json}) => html !== undefined && json !== undefined);
 
-const build = new Path("site");
+const build = new Path(conf.path.build);
 
 // recreate build path
 if (await build.exists) {
@@ -51,13 +42,53 @@ const replace = (name, html, json) => {
     title: json.title ?? name,
     // FIX: warn
     date: toDate(json.epoch).toLocaleString(...Object.values(conf.date)),
-    author: json.author ?? "terrablue", // FIX: make dynamic
+    author: json.author ?? conf.author,
   };
   return Object.entries(replacements).reduce((replaced, [name, value]) =>
     replaced.replace(`\$\{${name}\}`, value), html);
 };
 
-const index = await File.read("static/index.html");
-await Promise.all(posts.map(({name, html, json}) =>
-  build.join(`${name}.html`).file
-    .write(replace(name, index.replace("${content}", html), json))));
+const post = await File.read("static/post.html");
+
+// generate posts
+const paths = await Promise.all(posts.map(async ({name, html, json}) => {
+  const toDate = epoch => new Date(epoch ?? Date.new());
+  const date = toDate(json.epoch);
+  const format = {day: "2-digit", month: "2-digit", year: "numeric"};
+  const localeDate = date.toLocaleString("en-AU", format).split("/");
+  const [day, month, year] = localeDate;
+
+  const yearPath = build.join(year);
+  if (!(await yearPath.exists)) {
+    await yearPath.file.create();
+  }
+
+  const monthPath = yearPath.join(month);
+  if (!(await monthPath.exists)) {
+    await monthPath.file.create();
+  }
+
+  const dayPath = monthPath.join(day);
+  if (!(await dayPath.exists)) {
+    await dayPath.file.create();
+  }
+
+  const path = dayPath.join(`${name}.html`);
+
+  await path.file.write(replace(name, post.replace("${content}", html), json));
+
+  return {name, path: `${path}`, date: `${year}/${month}/${day}`};
+}));
+
+// generate index
+const index = (await File.read("static/index.html"))
+  .replace("${author}", conf.author)
+  .replace("${content}", () => 
+    paths.map(({name, date, path}) =>
+      `<p>
+         <a href="${path.replace(`${conf.path.build}/`, "")}">${name}</a>
+         <i>${date}</i>
+      <p>`
+    ));
+
+await build.join("index.html").file.write(index);
