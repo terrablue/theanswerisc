@@ -1,4 +1,4 @@
-# fly.toml file generated for theanswerisc on 2023-02-26T20:58:08+02:00
+# fly.toml file generated for primatejs on 2023-02-26T20:58:08+02:00
 
 app = "theanswerisc"
 kill_signal = "SIGINT"
@@ -14,12 +14,11 @@ processes = []
   http_checks = []
   internal_port = 8080
   processes = ["app"]
-  protocol = "tcp"
   script_checks = []
   [services.concurrency]
-    hard_limit = 25
-    soft_limit = 20
-    type = "connections"
+    type = "requests"
+    soft_limit = 200
+    hard_limit = 250
 
   [[services.ports]]
     force_https = true
@@ -29,9 +28,16 @@ processes = []
   [[services.ports]]
     handlers = ["tls", "http"]
     port = 443
+    tls_options = { "alpn" = ["h2", "http/1.1"], "versions" = ["TLSv1.2", "TLSv1.3"] }
 
-  [[services.tcp_checks]]
-    grace_period = "1s"
-    interval = "15s"
+  [services.http_checks]
+    interval = 20000
+    grace_period = "5s"
+    method = "get"
+    path = "/"
+    protocol = "http"
     restart_limit = 0
-    timeout = "2s"
+    timeout = 2000
+    tls_skip_verify = false
+    [services.http_checks.headers]
+
