@@ -48,7 +48,7 @@ const replace = (name, html, json) => {
     replaced.replace(`\$\{${name}\}`, value), html);
 };
 
-const post = await File.read("static/post.html");
+const post = await File.read("template/post.html");
 
 // generate posts
 const paths = await Promise.all(posts.map(async ({name, html, json}) => {
@@ -81,7 +81,7 @@ const paths = await Promise.all(posts.map(async ({name, html, json}) => {
 }));
 
 // generate index
-const index = (await File.read("static/index.html"))
+const index = (await File.read("template/index.html"))
   .replace("${author}", conf.author)
   .replace("${content}", () => 
     paths.map(({name, date, path}) =>
@@ -92,3 +92,15 @@ const index = (await File.read("static/index.html"))
     ));
 
 await build.join("index.html").file.write(index);
+
+// copy static asserts
+const _static = new Path("static");
+const _public = new Path("site/public");
+if (await _static.exists) {
+  if (await _public.exists) {
+    await _public.file.remove();
+  }
+  await _public.file.create();
+  // copy static files to public
+  await File.copy(_static, _public);
+}
