@@ -12,7 +12,6 @@ WORKDIR /theanswerisc
 
 RUN npm install; \
   npm run build;
-COPY ./robots.txt /theanswerisc/site
 
 FROM nginx:mainline-alpine
 
