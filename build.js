@@ -48,7 +48,7 @@ const replace = (name, html, json) => {
     replaced.replace(`\$\{${name}\}`, value), html);
 };
 
-const post = await File.read("template/post.html");
+const post = await File.read("layouts/post.html");
 
 // generate posts
 const paths = await Promise.all(posts.map(async ({name, html, json}) => {
@@ -81,7 +81,7 @@ const paths = await Promise.all(posts.map(async ({name, html, json}) => {
 }));
 
 // generate index
-const index = (await File.read("template/index.html"))
+const index = (await File.read("layouts/index.html"))
   .replace("${author}", conf.author)
   .replace("${content}", () => 
     paths.map(({name, date, path}) =>
