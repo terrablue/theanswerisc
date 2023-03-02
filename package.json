@@ -2,10 +2,14 @@
   "name": "theanswerisc",
   "type": "module",
   "scripts": {
-    "build": "node build.js"
+    "build": "node build.js",
+    "purge": "node penthouse.js"
   },
   "dependencies": {
     "marked": "^4.2.12",
     "runtime-compat": "^0.12.3"
+  },
+  "devDependencies": {
+    "penthouse": "^2.3.3"
   }
 }
