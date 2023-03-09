@@ -1,4 +1,5 @@
-ol, ul {
+ol,
+ul {
   list-style-position: outside;
   padding-left: 0;
 }
@@ -11,22 +12,25 @@ li {
 code .bold {
   font-weight: bold;
 }
-h1,h2,h3,h4,h5 {
+h1,
+h2,
+h3,
+h4,
+h5 {
   text-rendering: optimizeLegibility;
   margin-bottom: 0;
 }
 h1 {
-  font-family: 'Montserrat', sans-serif;
   font-weight: 900;
   font-size: 2.5rem;
   line-height: 1.1;
 }
 h2 {
-  font-size: 1.73286rem;
+  font-size: 1.73rem;
 }
 h4 {
   text-transform: uppercase;
-  letter-spacing: 0.140625em;
+  letter-spacing: 0.14em;
 }
 hr {
   width: 100%;
@@ -36,9 +40,10 @@ body {
   flex-direction: column;
   align-items: center;
   word-wrap: break-word;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 html {
-  font: 100%/1.75 'Merriweather','Georgia',serif;
   box-sizing: border-box;
   overflow-y: scroll;
 }
@@ -54,8 +59,8 @@ pre code {
   border: none;
   padding: 15px;
   font-family: monospace, monospace;
-  font-size:1em;
-  line-height: 1.75em;
+  font-size: 1.1em;
+  line-height: 1.85em;
   display: inline-block;
   box-sizing: border-box;
   min-width: 100%;
@@ -65,17 +70,17 @@ pre {
   border-radius: 6px;
   margin: 0;
   padding: 0;
-  background-color: #1E1E1E !important;
-  font-size: 0.85em;
-  line-height: 1.75em;
+  background-color: #1e1e1e !important;
+  font-size: 0.95em;
+  line-height: 1.85em;
   overflow: auto;
 }
 code {
   border-radius: 4px;
   border: 1px solid #d3d3d3;
   padding: 3px;
-  font-size: 1.1em;
-  line-height: 1.75em;
+  font-size: 1.2em;
+  line-height: 1.85em;
 }
 blockquote {
   margin-left: -1.75rem;
@@ -86,66 +91,71 @@ blockquote {
   padding-right: 0;
   padding-top: 0;
   margin-bottom: 1.75rem;
-  font-size: 1.20112rem;
-  line-height: 1.75rem;
-  color: hsla(0,0%,0%,0.59);
+  font-size: 1.3rem;
+  line-height: 1.85rem;
+  color: hsla(0, 0%, 0%, 0.59);
   font-style: italic;
-  border-left: 0.32813rem solid hsla(0,0%,0%,0.9);
+  border-left: 0.32813rem solid hsla(0, 0%, 0%, 0.9);
 }
 blockquote p {
   margin: 0;
 }
-@media (prefers-color-scheme:dark) {
+@media (prefers-color-scheme: dark) {
   code {
     color: white;
   }
   body {
-    background:#111;
-    color:#bbb 
+    background: #111;
+    color: #bbb;
   }
-  h1, h2, h3, h4, h5, h6, strong {
-    color:#e8e8e8 
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  strong {
+    color: #e8e8e8;
   }
   hr {
-    border-top:1px solid #797979 
+    border-top: 1px solid #797979;
   }
   a {
-    color:#8bc2e7 
+    color: #8bc2e7;
   }
   blockquote {
-    border-color:#fff;
-    color:inherit 
+    border-color: #fff;
+    color: inherit;
   }
   .time {
-    color:#8bc2e7!important 
- }
+    color: #8bc2e7 !important;
+  }
 }
 .highlight {
-  background-color: #1E1E1E;
-  color: #D4D4D4;
+  background-color: #1e1e1e;
+  color: #d4d4d4;
 }
 p:empty {
-  margin:0;
+  margin: 0;
 }
 * {
-  box-sizing:inherit;
+  box-sizing: inherit;
 }
 *:before {
-  box-sizing:inherit;
+  box-sizing: inherit;
 }
 *:after {
-  box-sizing:inherit;
+  box-sizing: inherit;
 }
 .post-link {
   display: block;
-  font-family: 'Montserrat', sans-serif;
   font-weight: 800;
-  font-size: 1.3rem;
-  line-height: 1.5rem;
+  font-size: 1.4rem;
+  line-height: 1.6rem;
 }
 .byline {
-  font-size: 0.83255rem;
-  line-height: 1.75rem;
+  font-size: 0.93rem;
+  line-height: 1.85rem;
   display: block;
   margin-bottom: 1.75rem;
   margin-top: 0;
@@ -159,7 +169,7 @@ p:empty {
   flex-direction: column;
 }
 #post-description {
-  margin-top:1.75rem;
+  margin-top: 1.75rem;
   text-align: right;
   font-style: italic;
   font-weight: 100;
@@ -173,17 +183,21 @@ figure {
   margin-bottom: 1.75rem;
 }
 figcaption {
-  text-align:center;
+  text-align: center;
 }
 iframe {
   align-self: center;
 }
 #header {
-  font-size: 1.7rem;
+  font-size: 1.8rem;
   margin: 0;
   padding: 0;
 }
-.reset-a, .reset-a:hover, .reset-a:visited, .reset-a:focus, .reset-a:active {
+.reset-a,
+.reset-a:hover,
+.reset-a:visited,
+.reset-a:focus,
+.reset-a:active {
   text-decoration: none;
   color: inherit;
   outline: 0;
@@ -193,8 +207,12 @@ iframe {
   flex-direction: column;
   align-items: center;
 }
-@media screen and (min-width:500px) {
+p {
+  font-size: 1.2rem;
+  line-height: 1.7rem;
+}
+@media screen and (min-width: 500px) {
   p {
-   text-align: justify;
+    text-align: justify;
   }
 }
