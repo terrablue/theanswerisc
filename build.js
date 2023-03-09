@@ -36,48 +36,31 @@ if (await build.exists) {
 }
 await build.file.create();
 
-const replace = (name, html, json) => {
+const process = (name, json) => {
   const toDate = epoch => new Date(epoch ?? Date.new());
-  const replacements = {
+  return {
     title: json.title ?? name,
     // FIX: warn
     date: toDate(json.epoch).toLocaleString(...Object.values(conf.date)),
     author: json.author ?? conf.author,
   };
-  return Object.entries(replacements).reduce((replaced, [name, value]) =>
-    replaced.replace(`\$\{${name}\}`, value), html);
 };
 
 const post = await File.read("layouts/post.html");
 
 // generate posts
 const paths = await Promise.all(posts.map(async ({name, html, json}) => {
-  const toDate = epoch => new Date(epoch ?? Date.new());
-  const date = toDate(json.epoch);
-  const format = {day: "2-digit", month: "2-digit", year: "numeric"};
-  const localeDate = date.toLocaleString("en-AU", format).split("/");
-  const [day, month, year] = localeDate;
+  const {title, date, author} = process(name, json);
 
-  const yearPath = build.join(year);
-  if (!(await yearPath.exists)) {
-    await yearPath.file.create();
-  }
+  const replacements = Object.entries({title, date, author})
+    .reduce((replaced, [name, value]) =>
+      replaced.replace(`\$\{${name}\}`, value),
+        post.replace("${content}", html));
+  const path = build.join(`${name}.html`);
 
-  const monthPath = yearPath.join(month);
-  if (!(await monthPath.exists)) {
-    await monthPath.file.create();
-  }
+  await path.file.write(replacements);
 
-  const dayPath = monthPath.join(day);
-  if (!(await dayPath.exists)) {
-    await dayPath.file.create();
-  }
-
-  const path = dayPath.join(`${name}.html`);
-
-  await path.file.write(replace(name, post.replace("${content}", html), json));
-
-  return {name, path: `${path}`, date: `${year}/${month}/${day}`};
+  return {name, path: `${path}`, date};
 }));
 
 // generate index
