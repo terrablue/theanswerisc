@@ -97,9 +97,9 @@ size_t (* flog_string_length)(char const string[]) = get_length;
 
 First, you're declaring a `static` (local) function `get_length`. This is your
 black box logic. Then, at some later point (or right away), you bind the
-function pointer `flog_string_length` to `get_length`, making it available
-externally. Personally I find this form better, even if it comes at the cost of
-a little bit more verbosity.
+`get_length` to the function pointer `flog_string_length`, making its code
+available externally. Personally I find this form better, even if it comes at
+the cost of a little bit more verbosity.
 
 Using this technique has many advantages. You separate implementation from
 exposure, and have a one-liner dedicated to exposure. You can easily change the
