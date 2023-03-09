@@ -11,13 +11,13 @@ When sharing code between files, you normally declare functions in header files
 which can be then used to inform other source files of the functions by
 including them. Consider the following example.
 
-In `some-header.h`.
+In `some-header.h`
 
 ```c
 int library_string_length(int some_param);
 ```
 
-Then, in `some-source.c`.
+Then, in `some-source.c`
 
 ```c
 int some_header_int_identity_fn(int some_param) {
@@ -25,7 +25,7 @@ int some_header_int_identity_fn(int some_param) {
 }
 ```
 
-Then, in `another-source.c`.
+Then, in `another-source.c`
 
 ```c
 #include "some-header.h"
@@ -43,13 +43,13 @@ and awkward.
 To solve this problem, you can use function pointer binding in C. Consider the
 following example from the [Flog][flog] code base.
 
-In `string.h`.
+In `string.h`
 
 ```c
 size_t flog_string_length(char const string[]);
 ```
 
-In `string.c`.
+In `string.c`
 
 ```c
 size_t flog_string_length(char const string[]) {
@@ -71,9 +71,9 @@ bound to different definitions, in different files.
 If you find, like me, the order of first declaring the externally visible
 function and then binding it to a local function kind of inverted, you can also
 do this in another way, the preferable way in Flog. To do this, you need to
-change declaration in `string.h` to that of an `extern` function pointer.
+change the declaration in `string.h` to that of an `extern` function pointer.
 
-In `string.h`.
+In `string.h`
 
 ```c
 extern size_t (* flog_string_length)(char const string[]);
@@ -82,7 +82,7 @@ extern size_t (* flog_string_length)(char const string[]);
 The `extern` keyword tells C that the `flog_string_length` will be resolved
 during linkage.
 
-Then, in `string.c`, you invert the binding.
+You then invert the binding in in `string.c`
 
 ```c
 static size_t get_length(char const string[]) {
@@ -104,8 +104,8 @@ a little bit more verbosity.
 Using this technique has many advantages. You separate implementation from
 exposure, and have a one-liner dedicated to exposure. You can easily change the
 exposed name of a function without influencing its internal usage in the file
-it's defined it, and best of all, you can use short names that makes sense in a
-local file scope, and long, namespaced names that makes sense in an external
+it's defined it, and best of all, you can use short names that make sense in a
+local file scope, and long, namespaced names that make sense in an external
 scope.
 
 [flog]: https://github.com/flogjs/flog
