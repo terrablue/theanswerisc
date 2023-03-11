@@ -71,8 +71,8 @@ const index = (await File.read("layouts/index.html"))
       `<p>
          <a href="${path.replace(`${conf.path.build}/`, "")}">${name}</a>
          <i>${date}</i>
-      <p>`
-    ));
+       </p>`
+    ).join(""));
 
 await build.join("index.html").file.write(index);
 
