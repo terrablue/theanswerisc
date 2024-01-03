@@ -14,7 +14,7 @@ including them. Consider the following example.
 In `some-header.h`
 
 ```c
-int library_string_length(int some_param);
+int some_header_int_identity_fn(int some_param);
 ```
 
 Then, in `some-source.c`
