@@ -66,6 +66,7 @@ const paths = await Promise.all(posts.map(async ({name, html, json}) => {
 // generate index
 const index = (await File.read("layouts/index.html"))
   .replace("${author}", conf.author)
+  .replace("${profile}", conf.profile)
   .replace("${content}", () => 
     paths.map(({name, date, path}) =>
       `<p>
