@@ -1,3 +1,10 @@
+table {
+  border-collapse: collapse
+}
+td {
+  border: 1px solid #000;
+  padding: 7px;
+}
 ol,
 ul {
   list-style-position: outside;
@@ -48,7 +55,7 @@ html {
   overflow-y: scroll;
 }
 main {
-  max-width: 42rem;
+  max-width: 47rem;
   width: 100vw;
   padding: 2.625rem 1.3125rem;
 }
@@ -59,7 +66,7 @@ pre code {
   border: none;
   padding: 15px;
   font-family: monospace, monospace;
-  font-size: 1.1em;
+  font-size: 1.0em;
   line-height: 1.85em;
   display: inline-block;
   box-sizing: border-box;
