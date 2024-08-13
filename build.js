@@ -1,6 +1,6 @@
 import {marked} from "marked";
 import {File, Path} from "runtime-compat/filesystem";
-import conf from "./conf.json" assert {type: "json"};
+import conf from "./conf.json" with {type: "json"};
 
 // get names of all posts
 const names = await Promise.all((
