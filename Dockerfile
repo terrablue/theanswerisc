@@ -7,7 +7,7 @@ COPY . .
 RUN npm install; \
   npm run build;
 
-FROM nginx:mainline-alpine
+FROM ghcr.io/ammnt/freenginx:main
 
 COPY --from=builder /theanswerisc/site /usr/share/nginx/html
-COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+COPY ./nginx.conf /etc/freenginx/conf.d/default.conf
