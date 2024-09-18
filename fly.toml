@@ -11,7 +11,7 @@ kill_timeout = "5s"
 
 [[services]]
   protocol = "tcp"
-  internal_port = 8080
+  internal_port = 8181
   auto_stop_machines = true
   auto_start_machines = true
   min_machines_running = 0
