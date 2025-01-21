@@ -26,7 +26,9 @@ const posts = (await Promise.all(names.map(async name => {
     html: await load(base.join(`${name}${conf.md}`), conf.md, marked.parse),
     json: await load(base.join(`${name}${conf.json}`), conf.json, JSON.parse),
   }
-}))).filter(({html, json}) => html !== undefined && json !== undefined);
+})))
+  .filter(({html, json}) => html !== undefined && json !== undefined)
+  .toSorted((a, b) => a.json.epoch > b.json.epoch ? -1 : 1);
 
 const build = new Path(conf.path.build);
 
