@@ -50,7 +50,7 @@ over a long period of time, deprecate the use of implicit reactive `let` until
 most of the community have switched to the explicit keyword. They could modify
 the Svelte compiler so it can see the `signal` keyword anywhere within a
 `<script>` block of `.svelte` files. It would probably make the Svelte compiler
-more complicated, but that's not a real cost here in **use**: the compiler runs
+more complicated, but that's not a real cost here in *use*: the compiler runs
 only once (the development cost might be a lot though, but that's *still* not a
 justification for runes).
 
@@ -91,7 +91,7 @@ I might *incrementally* add new features, like support for a `signal` keyword
 If you're using Svelte without any framework, the Poly repo contains an example
 on how to run Poly with esbuild under `apps/esbuild`.
 
-If you're a SvelteKit user, we recommend migrating to [Primate]. We've already
+If you're a SvelteKit user, I recommend migrating to [Primate]. We've already
 published a package for Poly, `@primate/poly`. To run your existing Svelte code 
 with it, configure your `primate.config.js` file with
 
@@ -124,6 +124,7 @@ Will need to be changed to
 
 Other than that, you can continue working on your code the same as you've done
 before.
+
 
 [introducing-runes]: https://www.youtube.com/watch?v=RVnxF3j3N8U
 [Primate]: https://primatejs.com
