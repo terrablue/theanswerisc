@@ -93,7 +93,7 @@ on how to run Poly with esbuild under `apps/esbuild`.
 
 If you're a SvelteKit user, I recommend migrating to [Primate]. We've already
 published a package for Poly, `@primate/poly`. To run your existing Svelte code 
-with it, configure your `primate.config.js` file with
+in `.svelte` files, configure your `primate.config.js` file with
 
 ```js
 import poly from "@primate/poly";
@@ -105,26 +105,7 @@ export default {
 };
 ```
 
-The only thing you'd need to change are Svelte imports inside components.
-For example, the following component:
-
-```svelte
-<script>
-  import { onMount } from "svelte";
-</script>
-```
-
-Will need to be changed to
-
-```svelte
-<script>
-  import { onMount } from "poly";
-</script>
-```
-
-Other than that, you can continue working on your code the same as you've done
-before.
-
+With that, you can continue working on your code the same as you've done before.
 
 [introducing-runes]: https://www.youtube.com/watch?v=RVnxF3j3N8U
 [Primate]: https://primatejs.com
