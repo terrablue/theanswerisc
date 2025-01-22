@@ -1,4 +1,4 @@
-Today I've released the first version of Poly, a fork of Svelte version 4 with
+Today I've released the first version of [Poly], a fork of Svelte version 4 with
 the goal of maintaining long-term support for it and avoiding the nonsense
 introduced with Svelte 5. Over time, I may add my own improvements, but the
 goal is for the developer to be able to use the excellent developer experience
@@ -128,3 +128,4 @@ before.
 
 [introducing-runes]: https://www.youtube.com/watch?v=RVnxF3j3N8U
 [Primate]: https://primatejs.com
+[Poly]: https://github.com/primatejs/poly
